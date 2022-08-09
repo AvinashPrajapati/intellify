@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Registration Page{% endblock title %}
+{% block currentlinks %}
+<link rel="stylesheet" href="{% static 'css/register.css' %}">
+<style>
+    .content {
+        min-height: 700px;
+        position: relative;
+
+    }
+
+    .content .cover {
+        position: absolute;
+        min-width: 280px;
+        width: 80%;
+        top: 200px;
+        right: 6%;
+        text-align: center;
+    }
+
+    .content form {
+        margin: 0 auto;
+        max-width: 280px;
+        display: flex;
+        flex-direction: column;
+        row-gap: 10px;
+        justify-content: center;
+    }
+
+    .content form input {
+        outline: none;
+    }
+
+    .content form .buttons {
+        margin-top: 15px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .content form .buttons a {
+        background-color: rgb(255, 189, 127);
+        padding: 2.5px 4px;
+    }
+
+    .content form .buttons button {
+        background-color: aquamarine;
+        padding: 4px 8px;
+        cursor: pointer;
+    }
+
+    .content form blockquote {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+    }
+</style>
+{% endblock currentlinks %}
+
+{% block body %}
+<div class="content">
+    <div class="cover">
+        <form method="post">
+            {% csrf_token %}
+            <blockquote>
+                <label for="username">Username:</label>
+                <input type="text" name="username" id="username" required>
+            </blockquote>
+            <blockquote>
+                <label for="password">Password:</label>
+                <input type="password" name="password" id="password" required>
+            </blockquote>
+
+            <div class="buttons">
+                <a href="{% url 'homepage' %}">Cancel</a>
+                <button type="submit">Proceed</button>
+            </div>
+            <blockquote style="max-width: 280px; margin:10px auto;">
+                {% if messages %}
+                {% for message in messages %}
+                <p {% if message.tags %} class="{{ message.tags }}" {% endif %}
+                    style="font-size: small;font-weight: bold;text-align: center;">
+                    {{message}}</p>
+                {% endfor %}
+                {% endif %}
+            </blockquote>
+        </form>
+    </div>
+</div>
+{% endblock body %}
+
+{% block scripts %}
+{% endblock scripts %}

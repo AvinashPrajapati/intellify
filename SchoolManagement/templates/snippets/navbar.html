@@ -1,0 +1,52 @@
+<style>
+    .navbar {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 5px;
+        border: 1px solid #c7c7c7;
+        background-color: #e6e6e6;
+    }
+
+    .navbar .logo {
+        padding: 3px 6px;
+    }
+
+    .navbar .menu .menulist {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: center;
+        list-style: none;
+        column-gap: 15px;
+    }
+
+    .menulist li a {
+        padding: 3px 6px;
+        background-color: brown;
+        border: 2px solid rgb(78, 14, 14);
+        color: #f0f0f0;
+    }
+</style>
+<div class="navbar">
+    <div class="logo">
+        <a href="{% url 'homepage' %}">
+            <h3>SCHOOL</h3>
+            <strong>PORTAL</strong>
+        </a>
+    </div>
+    <div class="menu">
+        <ul class="menulist">
+            {% if request.user.is_authenticated %}
+            <li><a style="background-color: transparent;color:rgb(58, 58, 58);">{{request.user.username}}</a></li>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+            <li><a href="#">FAQs</a></li>
+            <li><a href="{% url 'login' %}">Login</a></li>
+            {% endif %}
+        </ul>
+
+    </div>
+</div>

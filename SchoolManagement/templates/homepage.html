@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}HomePage{% endblock title %}
+{% block currentlinks %}
+<link rel="stylesheet" href="{% static 'css/homepage.css' %}">
+<style>
+    .content {
+        min-height: 700px;
+        position: relative;
+
+    }
+
+    .content .cover {
+        position: absolute;
+        min-width: 280px;
+        width: 80%;
+        top: 200px;
+        right: 6%;
+        text-align: center;
+    }
+
+    .content .cover h1 {
+        font-size: 65px;
+    }
+
+    .content .cover h3 {
+        font-size: 30px;
+    }
+</style>
+{% endblock currentlinks %}
+
+{% block body %}
+<div class="content">
+    <div class="cover">
+        <h1>MARVIN SCHOOL</h1>
+        <h3>A better way to view.</h3>
+        <p>- Affiliated to CBSE Board.</p><br>
+        <small>Register as teacher :
+            <a href="{% url 'faculty:teacherregister' %}"
+                style="font-size: 13px;padding:2px 4px;background-color:brown;color:rgb(233, 233, 233);border:1px solid rgb(36, 36, 36);">SignUp</a>
+            ../ Register as student : <a href="{% url 'student:studentregister' %}"
+                style="font-size: 13px;padding:2px 4px;background-color:brown;color:rgb(233, 233, 233);border:1px solid rgb(36, 36, 36);">SignUp</a>
+        </small>
+    </div>
+</div>
+{% endblock body %}
+
+{% block scripts %}
+{% endblock scripts %}
