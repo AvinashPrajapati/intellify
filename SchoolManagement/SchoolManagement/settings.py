@@ -119,7 +119,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = BASE_DIR / "staticfiles"
+STATIC_ROOT = BASE_DIR / "staticfiles"  #used when deploying the site and accessing the static files.
 STATICFILES_DIRS = BASE_DIR / "static",
 
 MEDIA_URL = '/media/'
@@ -130,6 +130,6 @@ MEDIA_ROOT = BASE_DIR / "media"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = "login"
-LOGOUT_REDIRECT_URL = 'homepage'
-AUTH_USER_MODEL = "faculty.CustomUser"
+LOGIN_URL = "login"   #what login url will be
+LOGOUT_REDIRECT_URL = 'homepage' #where to redirect after logout
+AUTH_USER_MODEL = "faculty.CustomUser"  # telling django that faculty's CustomUser modle is now new Auth model
