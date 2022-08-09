@@ -3,10 +3,10 @@ from django.contrib.auth.decorators import login_required
 from .models import Student
 from faculty.models import CustomUser
 from PIL import Image
-from django.contrib.auth.password_validation import validate_password
-from django.contrib import messages
+from django.contrib.auth.password_validation import validate_password  #password validater for secure passsword
+from django.contrib import messages  # message module to give messages like error and success and warning
 # Create your views here.
-def studentRegister(request):
+def studentRegister(request):  #resistering student here
     template_name = 'student-register.html'
     user_obj = None
     if request.method == "POST":
@@ -25,8 +25,9 @@ def studentRegister(request):
         conf_password = request.POST.get('conf_password')
         profile_pic = request.FILES['profilepic']
         member_type = request.POST.get('membertype')
-
-        if first_name and last_name:
+        
+        # validations 
+        if first_name and last_name:   
             if len(first_name)<3 and len(last_name)<3:
                 messages.error(request, "first name and last name must be greater than 3 charecters.")
                 return redirect("register")
@@ -73,14 +74,14 @@ def studentRegister(request):
         try:
             if user_obj is not None and member_type=='student':
                 print('student.......................')
-                Student.objects.create(student=user_obj, contact_number=mobileno, stream=stream, standard=standard,dob=dob)
+                Student.objects.create(student=user_obj, contact_number=mobileno, stream=stream, standard=standard,dob=dob)   #creating student obj using create method
                 messages.success(request, message="Registered successfully.")
         except Exception as e:
             print(e)
             messages.error(request, message="Something went wrong.")
 
     return render(request, template_name=template_name)
-@login_required
+@login_required  #as only logged in user can access their profile
 def studentProfile(request):
     user = CustomUser.objects.get(username=request.user.username)
     stu_obj = Student.objects.get(student = user)
