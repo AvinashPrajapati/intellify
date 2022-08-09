@@ -27,5 +27,9 @@ urlpatterns = [
     path('student/', include(('student.urls', 'student'), namespace='student')),
     path('faculty/', include(('faculty.urls', 'faculty'), namespace='faculty')),
 ]
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+# static and media file location mentioned
+#we ca use this also
+#if settings.DEBUG: then these two urls but in production we have to remove this
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)  
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
