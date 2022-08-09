@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 
 # Create your models here.
+# inheriting AbstractUser to add some more properties to it.
 class CustomUser(AbstractUser): 
     MEMBER_TYPE_CHOICES = (
         ('teacher', 'Teacher'),
@@ -13,12 +14,14 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
 
+# Subjects class.
 class Subject(models.Model):
     subject_name = models.CharField(max_length=255)
     subject_code = models.CharField(max_length=50)
     def __str__(self):
         return self.subject_name
-    
+
+# here inheriting CustomUser which inherits the AbstractUser   
 class Teacher(models.Model):
     teacher = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     teacher_room = models.CharField(max_length=100)
