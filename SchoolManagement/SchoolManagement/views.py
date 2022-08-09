@@ -31,7 +31,9 @@ def loginView(request):
         if username and raw_password:
             try:
                 user_obj = CustomUser.objects.get(username=username)
-                print(user_obj, user_obj.check_password(raw_password), '##########')
+                #print(user_obj, user_obj.check_password(raw_password), '##########')
+                # first authenticating user using authenticate method of auth module
+                #and then login the autheticated user
                 user = authenticate(request, username=username, password=raw_password)
                 login(request, user)
                 if user_obj.member_type == 'teacher':
@@ -43,7 +45,7 @@ def loginView(request):
                 messages.error(request, message='Invalid Credentials !!!')
     return render(request, template_name='login.html')
 
-@login_required
+@login_required   #as oly logged in user can logout 
 def logoutView(request):
     logout(request)
     messages.success(request, "Logout Successful")
